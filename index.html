@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Игра</title>
+
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+<h1>Насекомые</h1>
+
+<div class="sunsistem">
+	<img src="images/phon.png">
+</div>
+
+<span class="planeti" >
+	<img id="dragonfly" src="images/2.png" width="40" height="35">
+	<img id="grasshopper" src="images/1.png" width="60" height="50">
+	<img id="locust" src="images/3.png" width="80" height="55">
+	<img id="bee" src="images/4.png" width="55" height="50">
+	<img id="ladybug" src="images/5.png" width="55" height="40">
+	<img id="mosquito" src="images/6.png" width="55" height="40">
+	<img id="snail" src="images/7.png" width="55" height="40">
+	<img id="muse" src="images/8.png" width="55" height="40">
+	<img id="ant" src="images/9.png" width="55" height="40">
+	<img id="spider" src="images/10.png" width="55" height="40">
+	<img id="bug" src="images/11.png" width="55" height="40">
+	<img id="butterfly" src="images/12.png" width="65" height="50">
+	<img id="small_butterfly" src="images/13.png" width="52" height="37">
+	<img id="cockroach" src="images/14.png" width="55" height="40">
+	<img id="caterpillar" src="images/15.png" width="55" height="40">
+</span>
+
+<span id="message"></span>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+"use strict";
+
+const MASSIV = [
+	"dragonfly",
+	"grasshopper",
+	"locust",
+	"bee",
+	"ladybug",
+	"mosquito",
+	"snail",
+	"muse",
+	"ant",
+	"spider",
+	"bug",
+	"butterfly",
+	"small_butterfly" ,
+	"cockroach",
+	"caterpillar"
+	
+];
+
+// https://stackoverflow.com/a/2450976
+const shuffle = array => {
+	let currentIndex = array.length, randomIndex;
+
+	// While there remain elements to shuffle.
+	while (currentIndex !== 0) {
+
+		// Pick a remaining element.
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
+
+		// And swap it with the current element.
+		[array[currentIndex], array[randomIndex]] = [
+		array[randomIndex], array[currentIndex]];
+		}
+
+	return array;
+}
+
+const shuffledObjects = shuffle(MASSIV);
+let currentIndex = 0;
+
+const addEventListener = () => {
+	if (currentIndex >= shuffledObjects.length) {
+		document.getElementById("message").innerText = "Вы прошли игру!";
+		return;
+		}
+
+	document.getElementById("message").innerText = "Найди насекомое " + shuffledObjects[currentIndex];
+
+	document.getElementById(shuffledObjects[currentIndex]).addEventListener('click', function (event) {
+			event.preventDefault();
+
+			this.style.opacity = '0';
+			this.style.transition = '0.5s';
+
+			++currentIndex;
+
+			addEventListener();
+		});
+};
+
+addEventListener();
+
+</script>
